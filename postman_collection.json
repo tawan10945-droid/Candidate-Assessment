@@ -1,0 +1,188 @@
+{
+    "info": {
+        "_postman_id": "a4d3b5b7-7d8a-4c28-98e3-0d5b4a7c8e2b",
+        "name": "Candidate Assessment - To-Do List API",
+        "description": "API requests for the Node.js/Express To-Do list, demonstrating CRUD operations and basic API key authentication.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Health Check (No Auth Required)",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Get All To-Dos",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "secret-index-key-123",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "http://localhost:3000/todos",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "todos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Create To-Do (POST)",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "var response = pm.response.json();",
+                            "if(response.id) {",
+                            "    pm.environment.set(\"todo_id\", response.id);",
+                            "}"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "secret-index-key-123",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"title\": \"Test my new To-do API via Postman\",\n    \"completed\": false\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3000/todos",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "todos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Update To-Do Status (PUT)",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "secret-index-key-123",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"completed\": true\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3000/todos/{{todo_id}}",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "todos",
+                        "{{todo_id}}"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Delete To-Do (DELETE)",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "secret-index-key-123",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "http://localhost:3000/todos/{{todo_id}}",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "todos",
+                        "{{todo_id}}"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Authentication Error (Test 401)",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3000/todos",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000",
+                    "path": [
+                        "todos"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "variable": [
+        {
+            "key": "todo_id",
+            "value": ""
+        }
+    ]
+}
