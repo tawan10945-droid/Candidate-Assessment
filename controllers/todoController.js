@@ -1,7 +1,7 @@
 const todoModel = require('../models/todo');
 
 const todoController = {
-    // GET /todos
+    
     getAllTodos: (req, res, next) => {
         try {
             const todos = todoModel.getAll();
@@ -11,7 +11,6 @@ const todoController = {
         }
     },
 
-    // GET /todos/:id
     getTodoById: (req, res, next) => {
         try {
             const { id } = req.params;
@@ -27,7 +26,7 @@ const todoController = {
         }
     },
 
-    // POST /todos
+    
     createTodo: (req, res, next) => {
         try {
             const { title, completed } = req.body;
@@ -43,7 +42,7 @@ const todoController = {
         }
     },
 
-    // PUT /todos/:id
+  
     updateTodo: (req, res, next) => {
         try {
             const { id } = req.params;
